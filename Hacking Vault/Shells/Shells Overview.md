@@ -1,16 +1,22 @@
-   
+# 🌐 Shells Overview
 
-### What is a Shell?
+## 📋 What is a Shell?
 
-A shell is software that allows a user to interact with an OS. It can be a graphical interface, but it is usually a command-line interface, and this will depend on the operating system running on the target system.
+A **shell** is software that allows interaction with an operating system, typically via a command-line interface (CLI). In cybersecurity, it refers to a session an attacker uses to run commands on a compromised system.
 
-In cyber security, it commonly refers to a specific shell session an attacker uses when accessing a compromised system, allowing them to run commands and execute software. This will allow attackers to execute several activities, some of which are described below.
+## 🔍 Purpose in Cybersecurity
 
-- **Remote System Control**: allows the attacker to execute commands or software remotely in the target system.
-- **Privilege Escalation**: If initial access through a shell is limited or restricted, attackers can explore ways to escalate privileges to more elevated or administrative access.
-- **Data Exfiltration**: Once attackers have access to execute commands through an obtained shell, they can explore the system to read and copy sensitive data from it.
-- **Persistence and Maintenance Access**: Once shell access is obtained, attackers can create access through users and credentials or copy backdoor software to maintain access to the target system for later usage.
-- **Post-Exploitation Activities**: After access to a shell is granted, attackers can perform a wide range of post-exploitation activities, such as deploying malware, creating hidden accounts, and deleting information.
-- **Access Other Systems on the Network**: Depending on the attacker's intentions, the obtained shell can be just an initial access point. The goal can be to hop through the network to a different target using the obtained shell as a pivot to different points in the compromised system network. This is also known as pivoting.
+Shells enable attackers to perform various malicious activities:
 
-All of the shells we will describe in the next tasks can help to achieve different limitations of the attacks described above.
+- **Remote System Control**: Execute commands or software remotely.
+- **Privilege Escalation**: Gain higher access (e.g., administrative privileges).
+- **Data Exfiltration**: Access and steal sensitive data.
+- **Persistence**: Create backdoors or accounts for future access.
+- **Post-Exploitation**: Deploy malware, create hidden accounts, or delete data.
+- **Network Pivoting**: Use the compromised system to access other network targets.
+
+## ✅ Quick Notes
+
+- Shells can be graphical but are typically CLI-based, depending on the OS.
+- Types (e.g., bind, reverse, web shells) vary in setup and detection risk.
+- Shells are critical for initial access and lateral movement in attacks.

@@ -1,5 +1,0 @@
-   
-
-Vulnerabilities
-
-Patching

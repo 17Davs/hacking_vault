@@ -1,9 +1,6 @@
    
 
-Password Cracking
-
-Password Cracking  
-  
+ 
 Useful Links   
 [https://hashcat.net/wiki/doku.php?id=example_hashes](https://hashcat.net/wiki/doku.php?id=example_hashes "https://hashcat.net/wiki/doku.php?id=example_hashes")
 

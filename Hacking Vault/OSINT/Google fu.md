@@ -1,7 +1,4 @@
    
-
-Google fu
-
 # **Google Fu for Ethical Hacking**
 
 ## **1. What is Google Fu?**

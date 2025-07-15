@@ -1,7 +1,4 @@
    
-
-Scans
-
 ### Authenticated vs. Unauthenticated Scans
 
 Authenticated scans require the subject host's credentials and are more detailed than unauthenticated scans. These types of scans are helpful for discovering the threat surface within the host. However, unauthenticated scans are conducted without providing any credentials of the subject host. These scans help identify the threat surface from outside the host.

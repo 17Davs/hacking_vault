@@ -1,6 +1,3 @@
-   
-
-SQLmap
 
 ## 📌 SQLMap Cheat sheet
 

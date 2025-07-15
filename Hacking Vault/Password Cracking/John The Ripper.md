@@ -1,7 +1,4 @@
    
-
-John The Ripper
-
 ## John Basic Syntax
 
 The basic syntax of John the Ripper commands is as follows. We will cover the specific options and modifiers used as we use them.

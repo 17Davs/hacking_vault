@@ -1,6 +1,3 @@
-   
-
-Windows CLI
 
 ## Basic System Information
 

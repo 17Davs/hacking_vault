@@ -1,7 +1,4 @@
    
-
-Windows PowerShell
-
 ## **PowerShell Fundamentals**
 
 ### **Object-Oriented Shell**
