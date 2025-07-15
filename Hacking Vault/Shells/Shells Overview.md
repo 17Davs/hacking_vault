@@ -1,7 +1,5 @@
    
 
-Shells Overview
-
 ### What is a Shell?
 
 A shell is software that allows a user to interact with an OS. It can be a graphical interface, but it is usually a command-line interface, and this will depend on the operating system running on the target system.
