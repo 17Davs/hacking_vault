@@ -1,7 +1,4 @@
    
-
-Subdomains
-
 # **Subdomain Enumeration in Ethical Hacking**
 
 ## **1. What is Subdomain Enumeration?**
