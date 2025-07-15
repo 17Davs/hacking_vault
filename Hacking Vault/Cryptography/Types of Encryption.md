@@ -1,9 +1,5 @@
    
-
-Types of Encryption
-
 The two main categories of encryption are **symmetric** and **asymmetric**.
-
 ## Symmetric Encryption
 
 **Symmetric encryption**, also known as **symmetric cryptography**, uses the same key to encrypt and decrypt the data, as shown in the figure below. Keeping the key secret is a must; it is also called **private key cryptography**. Furthermore, communicating the key to the intended parties can be challenging as it requires a secure communication channel. Maintaining the secrecy of the key can be a significant challenge, especially if there are many recipients. The problem becomes more severe in the presence of a powerful adversary; consider the threat of industrial espionage, for instance.

@@ -1,9 +1,3 @@
-   
-
-SSH
-
-SSH
-
 ### Authenticating the Server
 
 If you have used an SSH client before, you would know the confirmation prompt in the terminal output below.
