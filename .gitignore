@@ -1,1 +1,9 @@
-.obsidian
+# Ignore everything by default
+*
+
+# Un-ignore Hacking Vault and its contents
+!Hacking Vault/
+!Hacking Vault/*
+
+# Ignore Obsidian cache
+.obsidian/
