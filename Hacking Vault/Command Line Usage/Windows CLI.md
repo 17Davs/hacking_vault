@@ -35,6 +35,7 @@
 - `mkdir [directory_name]`: Creates a new directory.
 - `rmdir [directory_name]`: Removes a directory.
 - `tree`: Shows a visual representation of directories and subdirectories.
+- `tree/f`: Includes files as well.
 
 ## Working With Files
 
