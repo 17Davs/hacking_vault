@@ -1,9 +1,4 @@
    
-
-Email Address Discovery
-
-# **Email Address Discovery**
-
 ## **1. What is Email Address Discovery?**
 
 Email address discovery involves finding valid email addresses associated with a target organization or domain. This can help in OSINT (Open-Source Intelligence) gathering or identifying potential contacts for phishing tests.

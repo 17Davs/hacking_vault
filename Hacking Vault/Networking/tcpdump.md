@@ -1,7 +1,4 @@
    
-
-tcpdump
-
 ✅ Basic `tcpdump` Options
 
 |Command|Explanation|

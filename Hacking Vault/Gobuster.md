@@ -1,7 +1,4 @@
    
-
-Gobuster
-
 # Gobuster Cheat Sheet
 
 **Gobuster** is a fast directory and file brute-forcing tool written in Go. It is commonly used to discover hidden directories, files, DNS subdomains, and S3 buckets.

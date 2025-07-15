@@ -1,7 +1,5 @@
    
 
-Bash Scripting
-
 # **Bash Scripting for Ethical Hackers and General Purpose**
 
 ## **1. What is Bash Scripting?**
