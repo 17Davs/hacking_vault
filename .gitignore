@@ -3,7 +3,7 @@
 
 # Un-ignore Hacking Vault and its contents
 !Hacking Vault/
-!Hacking Vault/*
+!Hacking Vault/**
 !README.md
 
 # Ignore Obsidian cache
