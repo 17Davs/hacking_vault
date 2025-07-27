@@ -1,7 +1,3 @@
-   
-
-Burp Suite
-
 # **Burp Suite in Ethical Hacking**
 
 ## **1. What is Burp Suite?**
@@ -15,9 +11,6 @@ Burp Suite
 ### **On Kali Linux**
 
 Burp Suite is pre-installed in Kali Linux, but you can install or update it using:
-
-sudo apt update
-sudo apt install burpsuite
 
 ```
 sudo apt update
