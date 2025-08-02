@@ -1,5 +1,3 @@
-# **Burp Suite in Ethical Hacking**
-
 ## **1. What is Burp Suite?**
 
 **Burp Suite** is a popular integrated platform for performing web application security testing. It is used to discover vulnerabilities such as SQL injection, XSS, CSRF, and others. Burp Suite provides tools for scanning, crawling, intercepting requests, and modifying responses in web applications.
@@ -25,15 +23,15 @@ You can download the free version of Burp Suite from [PortSwigger's website](htt
 
 ## **3. Basic Burp Suite Components**
 
-|Component|Description|
-|---|---|
-|**Proxy**|Intercepts HTTP/S traffic between the browser and the target site.|
-|**Scanner**|Scans for vulnerabilities like SQL injection, XSS, etc.|
-|**Spider**|Crawls the target site to discover hidden endpoints.|
-|**Intruder**|Automates attacks such as brute-forcing and fuzzing.|
-|**Repeater**|Sends individual requests repeatedly, useful for testing.|
-|**Decoder**|Decodes and encodes data in different formats (e.g., Base64, URL).|
-|**Comparer**|Compares two pieces of data to highlight differences.|
+| Component    | Description                                                        |
+| ------------ | ------------------------------------------------------------------ |
+| **Proxy**    | Intercepts HTTP/S traffic between the browser and the target site. |
+| **Scanner**  | Scans for vulnerabilities like SQL injection, XSS, etc.            |
+| **Spider**   | Crawls the target site to discover hidden endpoints.               |
+| **Intruder** | Automates attacks such as brute-forcing and fuzzing.               |
+| **Repeater** | Sends individual requests repeatedly, useful for testing.          |
+| **Decoder**  | Decodes and encodes data in different formats (e.g., Base64, URL). |
+| **Comparer** | Compares two pieces of data to highlight differences.              |
 
 ---
 
@@ -62,14 +60,37 @@ You can download the free version of Burp Suite from [PortSwigger's website](htt
 
 ---
 
+## **5. Burp Intruder**
+
+**Note:** When assigning numbers in the "Payload Set" dropdown for multiple positions, follow a top-to-bottom, left-to-right order.
+
+#### Attack Types Summary 
+- **Sniper**:
+    - **Default** and most common.    
+    - **Cycles through one payload set**, testing **each payload  into each positions one at a time**.
+    - Ideal for **focused testing**, checking **each parameter individually**.
+        
+- **Battering Ram**:
+    - Sends the **same payload to all positions simultaneously**.
+    - Useful for **race conditions** or when **inputs must match**.
+        
+- **Pitchfork**:
+    - Uses **different payloads for each position**, in **parallel**.
+    - Good for testing **distinct parameters independently**.
+        
+- **Cluster Bomb**:
+    - Tests **every combination** of **all payloads in all positions**.
+    - Ideal for **comprehensive multi-input testing**.
+
+
 ## **5. Burp Suite's Community vs Professional Versions**
 
-|Feature|Community Version|Professional Version|
-|---|---|---|
-|**Scanner**|No|Yes|
-|**Intruder**|Limited|Full access|
-|**Spider**|Limited|Full access|
-|**Price**|Free|Paid (with a trial)|
+| Feature      | Community Version | Professional Version |
+| ------------ | ----------------- | -------------------- |
+| **Scanner**  | No                | Yes                  |
+| **Intruder** | Limited           | Full access          |
+| **Spider**   | Limited           | Full access          |
+| **Price**    | Free              | Paid (with a trial)  |
 
 ---
 
