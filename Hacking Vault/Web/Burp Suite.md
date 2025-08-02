@@ -63,7 +63,6 @@ You can download the free version of Burp Suite from [PortSwigger's website](htt
 ## **5. Burp Intruder**
 
 **Note:** When assigning numbers in the "Payload Set" dropdown for multiple positions, follow a top-to-bottom, left-to-right order.
-
 #### Attack Types Summary 
 - **Sniper**:
     - **Default** and most common.    
