@@ -1,4 +1,4 @@
-
+ 
 Burp Suite: Using Macros to Grab Session & CSRF Tokens
 ## 🧠 Purpose
 Some login forms use **dynamic tokens** that must be refreshed per request:
