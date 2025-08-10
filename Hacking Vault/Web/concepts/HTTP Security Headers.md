@@ -4,7 +4,6 @@ HTTP Security Headers help protect web applications by mitigating attacks such a
 Use [https://securityheaders.io/](https://securityheaders.io/ "https://securityheaders.io/") to analyze headers.
 
 ---
-
 ## Key Security Headers
 
 ---
