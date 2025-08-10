@@ -1,8 +1,3 @@
-   
-
-Security Headers
-
-# HTTP Security Headers Cheat Sheet
 
 HTTP Security Headers help protect web applications by mitigating attacks such as XSS, clickjacking, and MIME type sniffing.
 

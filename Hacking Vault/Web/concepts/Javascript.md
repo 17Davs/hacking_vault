@@ -1,9 +1,3 @@
-   
-
-Javascript
-
-# 🕵️‍♂️ JavaScript for Pentesting Cheat Sheet
-
 ## 🎯 Common uses in pentesting
 
 ✅ **Client-side recon** – find hidden endpoints, API keys, or logic.  
