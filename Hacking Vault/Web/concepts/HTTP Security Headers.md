@@ -72,7 +72,6 @@ X-Content-Type-Options: nosniff
 |`nosniff`|Prevents guessing of MIME types.|
 
 ---
-
 ### 🔗 Referrer-Policy
 
 - Controls how much **referrer information** is sent with requests (like when clicking a link).
