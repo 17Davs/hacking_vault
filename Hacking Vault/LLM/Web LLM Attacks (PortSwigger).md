@@ -28,7 +28,7 @@
 
 ## Indirect Prompt Injection
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/b3e42d07-1c3b-45e7-9061-02cab08b6e0b/3861dcd8-ea14-4ec4-a87d-2460ff11aa60/Untitled.png)
+![[Pasted image 20250811182531.png]]
 
 Indirect prompt injection often enables web LLM attacks on other users. For example, if a user asks an LLM to describe a web page, a hidden prompt inside that page might make the LLM reply with an XSS payload designed to exploit the user.
 
