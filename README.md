@@ -7,7 +7,7 @@ This repo is my personal notebook from my ethical hacking and security learning 
 - **Tools**: Like Metasploit, Wireshark, and more.
 - **Techniques**: From exploitation to privilege escalation.
 - **Commands**: Handy snippets I don’t want to lose track of.
-- **And More**: Cryptography, vulnerabilities, and web security tidbits.
+- **And More**: Cryptography, vulnerabilities, and web security.
 
 It’s organized into folders to (try to) keep the chaos in check—check out the [structure](#folder-structure) below!
 
