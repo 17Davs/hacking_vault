@@ -23,4 +23,9 @@ How HEADERS affect request processing
 
 CL.TE Req Smuggling
 
+Transfer-Encoding Obfuscation
+
+
+
+Walkthrough 
 
