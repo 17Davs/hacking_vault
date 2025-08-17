@@ -8,9 +8,6 @@
 - It typically involves the **Content-Length (CL)** and **Transfer-Encoding (TE)** headers.
     
 - By exploiting these mismatches, attackers can **smuggle hidden requests**, manipulate back-end behavior, and poison caches.
-    
-
-📖 _Analogy:_ Imagine a train station with multiple checkpoints, each using different rules for validating tickets. A traveler can exploit these differences to board without a valid ticket. Similarly, attackers exploit parsing discrepancies between servers.
 
 ---
 
@@ -26,7 +23,7 @@
         
 - This desync allows a **smuggled request** to ride inside another.
     
-
+![[smuggling-http-request-to-back-end-server.svg]]
 ---
 
 ## 🧨 Attack Process
