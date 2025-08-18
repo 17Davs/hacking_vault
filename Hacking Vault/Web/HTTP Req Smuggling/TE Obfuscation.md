@@ -23,7 +23,9 @@
 It is necessary to find some variation of the TE header such that only one of the front-end or back-end servers processes it, while the other server ignores it.
 ![[TE Obfuscation visual.png]]
 ## 📌 **Example**
+[[3. Basic Obfuscating the TE header]] (with full methodology)
 
+Other one:
 ```http
 POST / HTTP/1.1
 Host: example.com
