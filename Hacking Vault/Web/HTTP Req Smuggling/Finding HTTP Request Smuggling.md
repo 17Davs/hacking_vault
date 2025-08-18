@@ -220,7 +220,7 @@ Backend Timeout = CL.TE vulnerability![[Pasted image 20250818114242.png]]
 
 
 
-Front-end Rejected = TE.{CL OR TE}![[Pasted image 20250818120106.png]]
+Front-end Rejected = TE.{CL OR TE}![[Invalid Chunk SIze.png]]
 
 Back-end Timeout = TE.CL
 ![[Pasted image 20250818120439.png]]
