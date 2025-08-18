@@ -43,4 +43,6 @@ isadmin=true
 - Back-end interprets differently (or falls back to CL).
 - Smuggled request (`POST /update`) is executed.
 
+https://portswigger.net/web-security/request-smuggling/lab-obfuscating-te-header
+
 > **Pro tip:** TE obfuscation is **essential for bypassing WAFs** and modern defenses. If a clean CL.TE/TE.CL payload is blocked, fuzzing TE variants often works.

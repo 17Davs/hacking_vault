@@ -107,7 +107,6 @@ Differential responses **prove exploitability** by showing one request **modifie
 2. Immediately send a **normal request**.
     
 3. If the normal request is corrupted, the vulnerability is confirmed.
-    
 
 ---
 
@@ -161,6 +160,7 @@ Foo: xPOST /search HTTP/1.1
 
 Back-end returns `404` → clear evidence of CL.TE vulnerability.
 
+https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses
 ---
 
 ### ✅ Confirming TE.CL via Differential Responses
@@ -202,6 +202,8 @@ x=
 
 **Normal Request** (same as above).  
 Result: Corrupted with `GET /404`, proving TE.CL vulnerability.
+
+https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses
 
 ---
 
