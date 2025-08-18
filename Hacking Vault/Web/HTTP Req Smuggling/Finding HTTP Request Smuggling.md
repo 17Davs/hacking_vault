@@ -212,10 +212,10 @@ STEPS:
 
 
 
-![[Pasted image 20250818114118.png]]
+![[Detection HTTP Request Smuggling.png]]
 Backend Timeout = CL.TE vulnerability![[Pasted image 20250818114242.png]]
 
-![[Pasted image 20250818114559.png]]
+![[Confirmation HTTP request smuggling.png]]
 
 
 
