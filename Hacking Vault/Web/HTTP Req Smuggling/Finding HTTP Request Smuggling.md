@@ -207,23 +207,6 @@ https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te
 
 ---
 
-STEPS:
-![[Pasted image 20250818115408.png]]
-
-
-
-![[Detection HTTP Request Smuggling.png]]
-Backend Timeout = CL.TE vulnerability![[Pasted image 20250818114242.png]]
-
-![[Confirmation HTTP request smuggling.png]]
-
-
-
-
-Front-end Rejected = TE.{CL OR TE}![[Invalid Chunk SIze.png]]
-
-Back-end Timeout = TE.CL
-![[Pasted image 20250818120439.png]]
 ## ⚠️ Key Considerations When Testing
 
 - **Separate Connections:** Attack & normal requests must use **different TCP connections**. If both are sent over the same one, smuggling won’t be detected.
