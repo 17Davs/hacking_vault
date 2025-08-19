@@ -4,8 +4,8 @@
 - One of the servers is induced to not process TE by obfuscation
 	
 - Exploits **malformed or duplicate TE headers**.
+![](../../Attachments/Req%20Smug/TE%20Header%20Obfuscations.png)
 
-![[TE Header Obfuscations.png]]
 ## 🧪 Common TE Obfuscation Tricks
 |Technique|Example Header|Why It Works|
 |---|---|---|
@@ -21,7 +21,7 @@
 |**Comma-separated encodings**|`Transfer-Encoding: gzip, chunked`|RFC-compliant but often mis-parsed → servers disagree on order.|
 
 It is necessary to find some variation of the TE header such that only one of the front-end or back-end servers processes it, while the other server ignores it.
-![[TE Obfuscation visual.png]]
+![](../../Attachments/Req%20Smug/TE%20Obfuscation%20visual.png)
 ## 📌 **Example**
 [[3. Basic Obfuscating the TE header]] (with full methodology)
 
