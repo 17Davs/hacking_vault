@@ -24,6 +24,7 @@
 |**Comma-separated encodings**|`Transfer-Encoding: gzip, chunked`|RFC-compliant but often mis-parsed → servers disagree on order.|
 
 It is necessary to find some variation of the TE header such that only one of the front-end or back-end servers processes it, while the other server ignores it.
+
 ![](../../Attachments/Req%20Smug/TE%20Obfuscation%20visual.png)
 ## 📌 **Example**
 [[3. Basic Obfuscating the TE header]] (with full methodology)
