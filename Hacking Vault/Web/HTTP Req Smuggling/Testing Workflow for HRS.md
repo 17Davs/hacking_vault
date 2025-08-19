@@ -1,6 +1,6 @@
 Quick Testing Workflow for HTTP Request Smuggling
 
-[[Finding HTTP Request Smuggling]]
+[[3. Finding HTTP Request Smuggling]]
 
 1. **Initial Recon**
     - Look for endpoints that accept **POST requests**.    
