@@ -4,6 +4,7 @@
 - One of the servers is induced to not process TE by obfuscation
 	
 - Exploits **malformed or duplicate TE headers**.
+
 ![](../../Attachments/Req%20Smug/TE%20Header%20Obfuscations.png)
 
 ## 🧪 Common TE Obfuscation Tricks
