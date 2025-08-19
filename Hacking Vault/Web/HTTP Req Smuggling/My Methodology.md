@@ -1,7 +1,11 @@
 # Pre-requisites
-![[Preparing Steps for Http Request smugglind.png]]
+
+![](../../Attachments/Req%20Smug/Preparing%20Steps%20for%20Http%20Request%20smugglind.png)
+
 # Detection
-![[Detection HTTP Request Smuggling.png]]
+
+![](../../Attachments/Req%20Smug/Detection%20HTTP%20Request%20Smuggling.png)
+
 Req 1:
 ``` HTTP 
 POST / HTTP/1.1
@@ -29,11 +33,17 @@ X
 
 
 ### For Request 1
-###### Front-end Rejected -> TE.{CL OR TE}![[Invalid Chunk SIze.png]]
+###### Front-end Rejected -> TE.{CL OR TE}
+
+![](../../Attachments/Req%20Smug/Invalid%20Chunk%20SIze.png)
+
 ###### Backend Timeout -> CL.TE
-![[Backend Timeout first req.png]]
+
+![](../../Attachments/Req%20Smug/Backend%20Timeout%20first%20req.png)
 
 ### For Request 2
 ###### Backend Timeout -> TE.CL
-![[Backend Timeout req 2.png]]
+
+![](../../Attachments/Req%20Smug/Backend%20Timeout%20req%202.png)
+
 
