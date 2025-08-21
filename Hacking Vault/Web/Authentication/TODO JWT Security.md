@@ -26,7 +26,7 @@ Example 5
 
 
 
-7
+task 7
 ``` bash
 ➜  ~ curl -H 'Content-Type: application/json' -X POST -d '{ "username" : "user", "password" : "password7", "application" : "appA" }' http://10.10.37.9/api/v1.0/example7
 {
