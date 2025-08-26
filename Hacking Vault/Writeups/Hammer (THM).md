@@ -54,3 +54,5 @@ Although, the Forgot Password, allows for valid email enumeration, since it disp
 ![](../../Pasted%20image%2020250826011653.png)
 We are asked for the 4-digit code sent to the email and a 180 seconds countdown starts...
 
+![](../../Pasted%20image%2020250826015807.png)
+
