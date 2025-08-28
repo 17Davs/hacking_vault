@@ -154,3 +154,30 @@ Changed it to `test123` and confirmed. Then used it to login and got the first f
 
 # Enumeration  -  Part II :)
 
+## Viewing Source Code and Analysing the behavior
+So, first thing that  I did was to view the source code. Found some useful information:
+
+1.  there is a script that logs us out every X seconds: 
+![](../../Pasted%20image%2020250827234808.png)
+2. The command execution handling script:
+![](../../Pasted%20image%2020250828000318.png)
+ 
+ The first script is based in the existence of the `persistenceSession` cookie. Tried to bypass it setting different values on the browser's development tools, but failed... 
+ It appears that the cookie is fully deleted or expires... so I logged in again and paid attention to the `Set-Cookie` headers in the logins POST reponse:
+ ![](../../Pasted%20image%2020250827235353.png)
+ Yes, the `persistentSession` expires after 20 second... Although there is a JWT token which expiration's is set to 10 minutes. 
+ >This means that I can **continue to use it in Burp Repeater**, this way I don't need to continuously log in from the browser.
+
+The second Script is used to send Ajax calls using our JWT token for authorization. 
+
+`ls` command works fine and we get some interesting files:
+![](../../Pasted%20image%2020250828001341.png)
+
+However, other commands seem to be blocked. We can try to brute-force for allowed ones...
+![](../../Pasted%20image%2020250828001004.png)
+
+
+Token 
+`eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ii92YXIvd3d3L215a2V5LmtleSJ9.eyJpc3MiOiJodHRwOi8vaGFtbWVyLnRobSIsImF1ZCI6Imh0dHA6Ly9oYW1tZXIudGhtIiwiaWF0IjoxNzU2MzMzNzY3LCJleHAiOjE3NTYzMzczNjcsImRhdGEiOnsidXNlcl9pZCI6MSwiZW1haWwiOiJ0ZXN0ZXJAaGFtbWVyLnRobSIsInJvbGUiOiJ1c2VyIn19.Q4WuP50gj3-IYzf3BINENI3rFLW9XGX_IW5Vi0SNaXM`
+https://www.jwt.io/
+![](../../Pasted%20image%2020250828001857.png)
